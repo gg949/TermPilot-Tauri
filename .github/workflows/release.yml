@@ -61,8 +61,9 @@ jobs:
         run: npm ci
 
       - name: Build and validate release artifacts
-        run: bash scripts/build-release-validation.sh "$VERSION" "$BUILD_NUMBER"
-
+        run: |
+          export TERMPILOT_BUILD_CARGO="$(which cargo)"
+          bash scripts/build-release-validation.sh "$VERSION" "$BUILD_NUMBER"
       - name: Upload release artifacts
         uses: actions/upload-artifact@v4
         with:
